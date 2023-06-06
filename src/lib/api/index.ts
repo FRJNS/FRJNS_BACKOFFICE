@@ -1,8 +1,12 @@
 import axios, { type AxiosError, type AxiosResponse } from 'axios';
 
 const instance = axios.create({
-	baseURL: 'https://frjns.duckdns.org/api'
+	baseURL: 'https://frjns.duckdns.org'
 });
+
+export const replaceAccessToken = (accessToken: string) => {
+	instance.defaults.headers.common.Authorization = `Bearer ${accessToken}`;
+};
 
 const interceptorResponseFulfilled = (response: AxiosResponse) => {
 	if (response.status >= 200 && response.status < 300) {
